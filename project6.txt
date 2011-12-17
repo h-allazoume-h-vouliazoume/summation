@@ -63,3 +63,21 @@ Summation(x, lower, upper):={
 }
 
 :;
+
+
+SummationPoly(x, z, lower, upper):={
+  local poly, j, temp_sum := 0;
+
+  poly := symb2poly(x, z);
+
+  poly := revlist(poly);
+
+  for(j := length(poly) - 1; j >= 0 ; j--) {
+      temp_sum := temp_sum + (poly[j] * Summation(j, lower, upper)); 
+  }
+
+  return temp_sum;
+
+}
+
+:;
