@@ -48,3 +48,18 @@ stirlingS2(n, k):={
 }
 
 :;
+
+Summation(x, lower, upper):={
+  local j, temp_sum;
+
+  temp_sum := 0;
+
+  for(j := 0; j < x + 1; j++) {
+      temp_sum := temp_sum + stirlingS2(x, j) * ((factorialPower(upper, j + 1) / (j + 1)) - (factorialPower(lower, j + 1) / (j + 1)));    
+  }
+
+  return simplify(temp_sum);
+
+}
+
+:;
