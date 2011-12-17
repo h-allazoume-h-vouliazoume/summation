@@ -2,18 +2,18 @@
 factorialPower(x, exponent):={
   local temp, j;
 
-  if(exponent == 0) {
+  if(exponent == 0) {   //an h paragontikh dynamh einai mhden 
       return 1;
   }
   else {
-      if(exponent > 0) {
+      if(exponent > 0) {      //an einai megalyterh apo to mhden
            temp := x;
            for(j := 1; j < exponent; j++) {
                temp := temp * (simplify(x - j));
            }
       }
-      else {
-          exponent := abs(exponent);
+      else {     //an einai mikrotero apo mhden(ayth h periptwsh de 8a emfanistei pote sto programma mas)
+          exponent := abs(exponent);   //pairnw thn apolyth timh
           temp := simplify(x + 1);
           for(j := 2; j <= exponent; j++) {
                temp := temp * (simplify(x + j));
@@ -31,7 +31,7 @@ factorialPower(x, exponent):={
 
 stirlingS2(n, k):={
 
-  if(n == 0 && k == 0) {
+  if(n == 0 && k == 0) {   // ta 3 ayta if einai oi syn8hkes termatismou ths anadromhs
       return 1;
   }
 
@@ -43,18 +43,18 @@ stirlingS2(n, k):={
       return 0;
   }
  
-  return k * stirlingS2(n - 1, k) +  stirlingS2(n - 1, k - 1);
+  return k * stirlingS2(n - 1, k) +  stirlingS2(n - 1, k - 1);  //anadromikos typos ypologismoy toy stirling 
 
 }
 
 :;
 
-Summation(x, lower, upper):={
+Summation(x, lower, upper):={    //ta orismata lower kai upper, einai to katw kai to panw orio antistoixa toy a8roismatos
   local j, temp_sum;
 
   temp_sum := 0;
 
-  for(j := 0; j < x + 1; j++) {
+  for(j := 0; j < x + 1; j++) {   //gia ena sygkekrimeno oro toy polywnymoy, ypologizoume th metatroph toy se paragontikh dynamh kai ekteloyme thn pra3h ths diaforas meta3y twn 2 oriwn.
       temp_sum := temp_sum + stirlingS2(x, j) * ((factorialPower(upper, j + 1) / (j + 1)) - (factorialPower(lower, j + 1) / (j + 1)));    
   }
 
@@ -65,15 +65,15 @@ Summation(x, lower, upper):={
 :;
 
 
-SummationPoly(x, z, lower, upper):={
+SummationPoly(x, z, lower, upper):={    //to x einai to polywnymo poy dinei o xrhsths, to z einai h metavlhth toy polywnymoy, to lower kai to upper einai ta oria opws kai sthn parapanw  periptwsh 
   local poly, j, temp_sum := 0;
 
-  poly := symb2poly(x, z);
+  poly := symb2poly(x, z);   //edw pairnoyme toys syntelestes toy polywnymoy 
 
-  poly := revlist(poly);
+  poly := revlist(poly);     //antristrefoyme th lista gia na petyxoyme antistoixhsh toy mhdenikoy oroy toy polywnymoy me th mhdenikh 8esh toy pinaka kok...
 
   for(j := length(poly) - 1; j >= 0 ; j--) {
-      temp_sum := temp_sum + (poly[j] * Summation(j, lower, upper)); 
+      temp_sum := temp_sum + (poly[j] * Summation(j, lower, upper));    //gia ka8e oro toy polywnymoy ekteloyme th summation
   }
 
   return temp_sum;
