@@ -28,3 +28,23 @@ factorialPower(x, exponent):={
 }
 
 :;
+
+stirlingS2(n, k):={
+
+  if(n == 0 && k == 0) {
+      return 1;
+  }
+
+  if(k < 0) {
+      return 0;
+  }
+   
+  if(k > n) {
+      return 0;
+  }
+ 
+  return k * stirlingS2(n - 1, k) +  stirlingS2(n - 1, k - 1);
+
+}
+
+:;
